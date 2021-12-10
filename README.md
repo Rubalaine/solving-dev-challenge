@@ -6,13 +6,14 @@ O projecto foi desenvolvido usando o ReactJs, com o auxilio das bibliotecas: `st
 ## Funcionalides
 
 o projecto inclui as seguintes funcionalides:
-[*] - filtro por pesquisa;
-[*] - conversão para os formatos: XML, XLS e CSV;
-[*] - Conversão de acordo com o filtro
+
+- filtro por pesquisa;
+- conversão para os formatos: XML, XLS e CSV;
+- Conversão de acordo com o filtro
 
 ## Demo
 
-A demonstração do resultado final deste desafio, está presente pelo link: [Demo](https://google.com)
+A demonstração do resultado final deste desafio, está presente pelo link: [Demo](https://dev-challenge-rubalaine.netlify.app/)
 
 ## Teste
 
