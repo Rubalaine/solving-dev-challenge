@@ -82,9 +82,10 @@ const App = () => {
           country.regiao
             .toLowerCase()
             .includes(event.target.value.toLowerCase()) ||
-          country.capital
-            .toLowerCase()
-            .includes(event.target.value.toLowerCase())
+          (country.capital &&
+            country.capital
+              .toLowerCase()
+              .includes(event.target.value.toLowerCase()))
       )
     );
   };
