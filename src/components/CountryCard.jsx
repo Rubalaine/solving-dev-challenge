@@ -15,7 +15,9 @@ const CountryCard = ({ country }) => {
       <p>Região: {country.regiao}</p>
       <p>Sub-Região: {country.sub_regiao}</p>
       <p>População: {country.populacao}</p>
-      <p>Área: {country.area}</p>
+      <p>
+        Área: {country.area} Km<sup>2</sup>
+      </p>
       <p>
         Fusos Horários:{" "}
         {country.fuso_horario.map((timezone, key) => (

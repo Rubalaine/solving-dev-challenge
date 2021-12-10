@@ -49,10 +49,11 @@ const App = () => {
               : "Sem nome nativo",
           capital: country.capital && country.capital[0],
           regiao: country.region,
-          sub_region: country.subregion,
+          sub_regiao: country.subregion,
           populacao: country.population,
           fuso_horario: country.timezones,
           bandeira: country.flags.png,
+          area: country.area,
         };
       });
     };
@@ -60,7 +61,7 @@ const App = () => {
       try {
         setIsloading(true);
         const { data } = await axios.get("https://restcountries.com/v3.1/all");
-        // console.log(data);
+        console.log(data);
         const shapedData = shapeData(data);
         setCountries(shapedData);
         setFilteredCountries(shapedData);
