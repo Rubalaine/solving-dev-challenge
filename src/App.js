@@ -16,6 +16,14 @@ const CountryGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 10px;
 `;
+const ButtonsList = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+`;
 
 const Header = styled.div`
   display: flex;
@@ -23,20 +31,39 @@ const Header = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [isLoading, setIsloading] = useState(false);
   useEffect(() => {
+    const shapeData = (countries) => {
+      return countries.map((country) => {
+        return {
+          nome: country.name.official + " " + country.flag,
+          nome_nativo:
+            country.name.nativeName && Object.keys(country.name.nativeName)
+              ? country.name.nativeName[Object.keys(country.name.nativeName)[0]]
+                  .official
+              : "Sem nome nativo",
+          capital: country.capital && country.capital[0],
+          regiao: country.region,
+          sub_region: country.subregion,
+          populacao: country.population,
+          fuso_horario: country.timezones,
+          bandeira: country.flags.png,
+        };
+      });
+    };
     const getCountries = async () => {
       try {
         setIsloading(true);
         const { data } = await axios.get("https://restcountries.com/v3.1/all");
         // console.log(data);
-        setCountries(data);
-        setFilteredCountries(data);
+        const shapedData = shapeData(data);
+        setCountries(shapedData);
+        setFilteredCountries(shapedData);
         setIsloading(false);
       } catch (error) {
         console.error("error ocurred", error);
@@ -44,20 +71,20 @@ const App = () => {
     };
     getCountries();
   }, []);
+
   const filter = (event) => {
     setFilteredCountries(
       countries.filter(
         (country) =>
-          country.name.official
+          country.nome
             .toLowerCase()
             .includes(event.target.value.toLowerCase()) ||
-          country.region
+          country.regiao
             .toLowerCase()
             .includes(event.target.value.toLowerCase()) ||
-          (country.capital &&
-            country.capital[0]
-              .toLowerCase()
-              .includes(event.target.value.toLowerCase()))
+          country.capital
+            .toLowerCase()
+            .includes(event.target.value.toLowerCase())
       )
     );
   };
@@ -78,7 +105,7 @@ const App = () => {
         <p>Carregando a lista de paises, aguarde ...</p>
       ) : (
         <div>
-          <div>
+          <ButtonsList>
             <button onClick={() => jsonExporter("csv")}>
               exportar para CSV
             </button>
@@ -88,7 +115,7 @@ const App = () => {
             <button onClick={() => jsonExporter("xml")}>
               exportar para XML
             </button>
-          </div>
+          </ButtonsList>
           <CountryGrid>
             {filteredCountries.length ? (
               filteredCountries.map((country, index) => (

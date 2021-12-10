@@ -9,28 +9,20 @@ const Card = styled.div`
 const CountryCard = ({ country }) => {
   return (
     <Card>
-      <p>
-        Nome: {country.name.official} {country.flag}
-      </p>
-      <p>
-        Nome nativo:{" "}
-        {country.name.nativeName && Object.keys(country.name.nativeName)
-          ? country.name.nativeName[Object.keys(country.name.nativeName)[0]]
-              .official
-          : "Sem nome nativo"}
-      </p>
-      <p>Capital: {country.capital && country.capital[0]}</p>
-      <p>Região: {country.region}</p>
-      <p>Sub-Região: {country.subregion}</p>
-      <p>População: {country.population}</p>
+      <p>Nome: {country.nome}</p>
+      <p>Nome nativo: {country.nome_nativo}</p>
+      <p>Capital: {country.capital}</p>
+      <p>Região: {country.regiao}</p>
+      <p>Sub-Região: {country.sub_regiao}</p>
+      <p>População: {country.populacao}</p>
       <p>Área: {country.area}</p>
       <p>
         Fusos Horários:{" "}
-        {country.timezones.map((timezone, key) => (
+        {country.fuso_horario.map((timezone, key) => (
           <span key={key}>[ {timezone} ] </span>
         ))}
       </p>
-      <a href={country.flags.png}>Vizualizar bandeira</a>
+      <a href={country.bandeira}>Vizualizar bandeira</a>
     </Card>
   );
 };
